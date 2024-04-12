@@ -1,4 +1,4 @@
-function ContactList({ contacts }) {
+export default function ContactList({ contacts }) {
   return (
     <ul>
       {contacts.map((contact, index) => (
@@ -9,5 +9,3 @@ function ContactList({ contacts }) {
     </ul>
   );
 }
-
-export default ContactList;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-function ContactForm({ addContact }) {
+export default function ContactForm({ addContact }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -31,5 +31,3 @@ function ContactForm({ addContact }) {
     </form>
   );
 }
-
-export default ContactForm;
