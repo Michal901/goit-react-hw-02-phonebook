@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
+import { useState } from 'react';
+import ContactForm from './components/ContactForm';
+import ContactList from './components/ContactList';
 
-function App() {
+export const App = () => {
   const [contacts, setContacts] = useState([]);
   const [name, setName] = useState('');
 
@@ -17,6 +17,4 @@ function App() {
       <ContactList contacts={contacts} />
     </div>
   );
-}
-
-export default App;
+};
