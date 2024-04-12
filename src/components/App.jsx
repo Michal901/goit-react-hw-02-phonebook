@@ -20,30 +20,38 @@ export function App() {
       <form onSubmit={handleSubmit}>
         <div>
           <div>
-            <label htmlFor="author">Autor</label>
+            <label htmlFor="name">Autor</label>
           </div>
           <input
             type="text"
-            name="author"
-            id="author"
             value={inputValue}
+            name="name"
+            pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
             onChange={e => {
               setInputValue(e.target.value);
             }}
+            id="name"
           />
         </div>
         <div>
           <div>
-            <label htmlFor="text">Tekst</label>
+            <label htmlFor="tel">Tekst</label>
           </div>
-          <textarea
-            name="text"
-            id="text"
+
+          <input
+            type="tel"
+            name="name"
+            id="tel"
             value={textareaValue}
+            pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
             onChange={e => {
               setTextareaValue(e.target.value);
             }}
-          ></textarea>
+          />
         </div>
         <button
           type="submit"
