@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-const INITIAL_STATE = { contacts: [], name: '', number: '' };
+const INITIAL_STATE = {
+  contacts: [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ],
+  filter: '',
+  name: '',
+  number: '',
+};
 
 export default function ContactForm() {
   const [nameValue, setNameValue] = useState('');
   const [numberValue, setNumberValue] = useState('');
+  const [filterValue, setFilterValue] = useState('');
   const [contacts, setContacts] = useState(INITIAL_STATE.contacts);
 
   const handleSubmit = e => {
@@ -17,8 +28,15 @@ export default function ContactForm() {
 
     setNameValue('');
     setNumberValue('');
-    console.log(contacts);
   };
+
+  const handleFilterChange = e => {
+    setFilterValue(e.target.value);
+  };
+
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filterValue.toLowerCase())
+  );
 
   return (
     <>
@@ -31,7 +49,6 @@ export default function ContactForm() {
             id="name"
             value={nameValue}
             onChange={e => setNameValue(e.target.value)}
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
         </div>
@@ -43,14 +60,25 @@ export default function ContactForm() {
             id="number"
             value={numberValue}
             onChange={e => setNumberValue(e.target.value)}
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
         </div>
         <button type="submit">Add contact</button>
       </form>
+
+      <div>
+        <label htmlFor="filter">Filter by Name:</label>
+        <input
+          type="text"
+          id="filter"
+          value={filterValue}
+          onChange={handleFilterChange}
+          placeholder="Search..."
+        />
+      </div>
+
       <ul>
-        {contacts.map(contact => (
+        {filteredContacts.map(contact => (
           <li key={contact.id}>
             <p>
               <strong>{contact.name}: </strong>
