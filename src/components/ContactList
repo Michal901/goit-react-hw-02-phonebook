@@ -1,9 +1,0 @@
-export default function ContactList() {
-
-return (
-<ul>
-  <li key={index}>
-  </li>
-</ul>
-);
-}
