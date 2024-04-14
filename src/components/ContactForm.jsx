@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-const INITIAL_STATE = { contacts: [], name: '' };
+const INITIAL_STATE = { contacts: [], name: '', number: '' };
 
 export default function ContactForm() {
-  const [inputValue, setInputValue] = useState('');
-  const [contacts, setContacts] = useState(INITIAL_STATE.contacts);
+  const [nameValue, setNameValue] = useState('');
+  const [names, setNames] = useState(INITIAL_STATE.contacts);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!inputValue.trim()) return; // Jeśli wartość inputu jest pusta, nie dodawaj kontaktu
-    const newContact = { id: nanoid(), name: inputValue };
-    setContacts(prevContacts => [...prevContacts, newContact]);
-    setInputValue(''); // Wyczyść wartość inputu po dodaniu kontaktu
+    if (!nameValue.trim()) return; // Jeśli wartość inputu jest pusta, nie dodawaj kontaktu
+    const newContact = { id: nanoid(), name: nameValue };
+    setNames(prevNames => [...prevNames, newContact]); // Dodaj nowy kontakt do listy kontaktów
+    setNameValue(''); // Wyczyść wartość inputu po dodaniu kontaktu
   };
 
   return (
@@ -25,18 +25,26 @@ export default function ContactForm() {
           type="text"
           name="name"
           id="name"
-          value={inputValue}
-          onChange={e => setInputValue(e.target.value)}
+          value={nameValue}
+          onChange={e => setNameValue(e.target.value)}
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+        />
+        <input
+          type="tel"
+          name="number"
+          id="number"
+          // onChange={e => setNumberValue(e.target.value)}
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
         <button type="submit">Add contact</button>
       </form>
       <ul>
-        {contacts.map(contact => (
-          <li key={contact.id}>
+        {names.map(name => (
+          <li key={name.id}>
             <p>
-              <strong>{contact.name}</strong>
+              <strong>{name.name}</strong>
             </p>
           </li>
         ))}
