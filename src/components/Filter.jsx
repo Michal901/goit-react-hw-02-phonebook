@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 const Filter = ({ filterValue, setFilterValue }) => {
   return (
     <div>
-      <label htmlFor="filter">Filter by Name:</label>
+      <div>
+        <label htmlFor="filter">Find contact by name:</label>
+      </div>
       <input
         type="text"
         id="filter"
