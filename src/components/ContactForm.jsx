@@ -1,14 +1,22 @@
-// ContactForm.js
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = ({ contacts, addContact }) => {
   const [nameValue, setNameValue] = useState('');
   const [numberValue, setNumberValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!nameValue.trim() || !numberValue.trim()) return;
+
+    const isDuplicate = contacts.some(
+      contact => contact.name.toLowerCase() === nameValue.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert(`${nameValue} is already in contacts.`);
+      return;
+    }
 
     const newContact = { id: nanoid(), name: nameValue, number: numberValue };
     addContact(newContact);
