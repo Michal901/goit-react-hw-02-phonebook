@@ -5,24 +5,26 @@ const INITIAL_STATE = { contacts: [], name: '', number: '' };
 
 export default function ContactForm() {
   const [nameValue, setNameValue] = useState('');
-  const [names, setNames] = useState(INITIAL_STATE.contacts);
-  const [numbers, setNumbers] = useState(INITIAL_STATE.number);
+  const [numberValue, setNumberValue] = useState('');
+  const [contacts, setContacts] = useState(INITIAL_STATE.contacts);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!nameValue.trim()) return;
-    const newContact = { id: nanoid(), name: nameValue };
-    setNames(prevNames => [...prevNames, newContact]); // Dodaj nowy kontakt do listy kontaktów
-    setNameValue(''); // Wyczyść wartość inputu po dodaniu kontaktu
+    if (!nameValue.trim() || !numberValue.trim()) return;
+
+    const newContact = { id: nanoid(), name: nameValue, number: numberValue };
+    setContacts(prevContacts => [...prevContacts, newContact]);
+
+    setNameValue('');
+    setNumberValue('');
+    console.log(contacts);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div>
-          <div>
-            <label htmlFor="name">Name</label>
-          </div>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
@@ -34,15 +36,13 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          {' '}
-          <div>
-            <label htmlFor="name">Number</label>
-          </div>
+          <label htmlFor="number">Number</label>
           <input
             type="tel"
             name="number"
             id="number"
-            // onChange={e => setNumberValue(e.target.value)}
+            value={numberValue}
+            onChange={e => setNumberValue(e.target.value)}
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
@@ -50,10 +50,11 @@ export default function ContactForm() {
         <button type="submit">Add contact</button>
       </form>
       <ul>
-        {names.map(name => (
-          <li key={name.id}>
+        {contacts.map(contact => (
+          <li key={contact.id}>
             <p>
-              <strong>{name.name}</strong>
+              <strong>{contact.name}: </strong>
+              {contact.number}
             </p>
           </li>
         ))}
