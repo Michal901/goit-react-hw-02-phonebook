@@ -1,11 +1,22 @@
-// import {nanoid} from 'nanoid';
+const Contact = ({ contact }) => {
+  return (
+    <li>
+      <p>
+        <strong>{contact.name}: </strong>
+        {contact.number}
+      </p>
+    </li>
+  );
+};
 
-// export default function ContactList() {
+const ContactList = ({ contacts }) => {
+  return (
+    <ul>
+      {contacts.map(contact => (
+        <Contact key={contact.id} contact={contact} />
+      ))}
+    </ul>
+  );
+};
 
-// return (
-// <ul>
-//   <li key={nanoid()}>
-//   </li>
-// </ul>
-// );
-// }
+export default ContactList;
