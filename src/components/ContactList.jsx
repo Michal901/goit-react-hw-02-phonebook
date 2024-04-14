@@ -1,11 +1,11 @@
-import {nanoid} from 'nanoid';
+// import {nanoid} from 'nanoid';
 
-export default function ContactList() {
+// export default function ContactList() {
 
-return (
-<ul>
-  <li key={nanoid()}>
-  </li>
-</ul>
-);
-}
+// return (
+// <ul>
+//   <li key={nanoid()}>
+//   </li>
+// </ul>
+// );
+// }
