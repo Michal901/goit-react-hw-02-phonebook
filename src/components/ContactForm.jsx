@@ -6,10 +6,11 @@ const INITIAL_STATE = { contacts: [], name: '', number: '' };
 export default function ContactForm() {
   const [nameValue, setNameValue] = useState('');
   const [names, setNames] = useState(INITIAL_STATE.contacts);
+  const [numbers, setNumbers] = useState(INITIAL_STATE.number);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!nameValue.trim()) return; // Jeśli wartość inputu jest pusta, nie dodawaj kontaktu
+    if (!nameValue.trim()) return;
     const newContact = { id: nanoid(), name: nameValue };
     setNames(prevNames => [...prevNames, newContact]); // Dodaj nowy kontakt do listy kontaktów
     setNameValue(''); // Wyczyść wartość inputu po dodaniu kontaktu
@@ -19,25 +20,33 @@ export default function ContactForm() {
     <>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name</label>
+          <div>
+            <label htmlFor="name">Name</label>
+          </div>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={nameValue}
+            onChange={e => setNameValue(e.target.value)}
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
         </div>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={nameValue}
-          onChange={e => setNameValue(e.target.value)}
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-        <input
-          type="tel"
-          name="number"
-          id="number"
-          // onChange={e => setNumberValue(e.target.value)}
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
+        <div>
+          {' '}
+          <div>
+            <label htmlFor="name">Number</label>
+          </div>
+          <input
+            type="tel"
+            name="number"
+            id="number"
+            // onChange={e => setNumberValue(e.target.value)}
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </div>
         <button type="submit">Add contact</button>
       </form>
       <ul>
