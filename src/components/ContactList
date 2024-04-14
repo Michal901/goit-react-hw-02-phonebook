@@ -1,11 +1,9 @@
-export default function ContactList({ contacts }) {
-  return (
-    <ul>
-      {contacts.map((contact, index) => (
-        <li key={index}>
-          {contact.name}: {contact.number}
-        </li>
-      ))}
-    </ul>
-  );
+export default function ContactList() {
+
+return (
+<ul>
+  <li key={index}>
+  </li>
+</ul>
+);
 }
