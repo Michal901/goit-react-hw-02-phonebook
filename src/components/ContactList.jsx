@@ -1,22 +1,17 @@
-const Contact = ({ contact }) => {
-  return (
-    <li>
-      <p>
-        <strong>{contact.name}: </strong>
-        {contact.number}
-      </p>
-    </li>
-  );
-};
-
-const ContactList = ({ contacts }) => {
+const Contact = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
       {contacts.map(contact => (
-        <Contact key={contact.id} contact={contact} />
+        <li key={contact.id}>
+          <p>
+            <strong>{contact.name}: </strong>
+            {contact.number}
+          </p>
+          <button onClick={() => onDeleteContact(contact.id)}>Usuń</button>
+        </li>
       ))}
     </ul>
   );
 };
 
-export default ContactList;
+export default Contact;
